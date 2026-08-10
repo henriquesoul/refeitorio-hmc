@@ -290,9 +290,6 @@
     }
 
 
-
-    /* Moldura azul */
-
     .mira {
 
       position: absolute;
@@ -320,8 +317,6 @@
     }
 
 
-    /* Moldura verde quando identifica */
-
     .mira.detectado {
 
       border-color: #16a34a;
@@ -331,7 +326,6 @@
         rgba(22, 163, 74, 0.20);
 
     }
-
 
 
     .status-camera {
@@ -356,7 +350,7 @@
 
 
     /* ==============================
-       RESULTADO DO QR
+       RESULTADO
        ============================== */
 
     .resultado {
@@ -367,7 +361,7 @@
 
       margin-top: 7px;
 
-      padding: 9px 10px;
+      padding: 10px;
 
       background: #eaf7ee;
 
@@ -381,17 +375,31 @@
       text-align: center;
 
       font-size:
-        clamp(11px, 3vw, 15px);
+        clamp(12px, 3.2vw, 16px);
 
-      line-height: 1.25;
+      line-height: 1.3;
 
       font-weight: 800;
 
       word-break: break-word;
 
-      max-height: 72px;
+    }
 
-      overflow: hidden;
+
+    .token {
+
+      display: block;
+
+      margin-top: 4px;
+
+      font-size:
+        clamp(18px, 5vw, 24px);
+
+      font-weight: 900;
+
+      color: #0d6f32;
+
+      letter-spacing: 1px;
 
     }
 
@@ -497,10 +505,6 @@
 
 
 
-    /* ==============================
-       TELAS MAIS BAIXAS
-       ============================== */
-
     @media (max-height: 650px) {
 
       .hospital {
@@ -529,11 +533,6 @@
 
     }
 
-
-
-    /* ==============================
-       TABLETS / NOTEBOOKS
-       ============================== */
 
     @media (min-width: 700px) {
 
@@ -701,11 +700,6 @@
 
 
 
-<!--
-  Biblioteca responsável
-  por interpretar o QR Code
--->
-
 <script
   src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js">
 </script>
@@ -748,31 +742,13 @@ let horarioUltimaLeitura =
 
 
 
-/*
-  Tempo mínimo para aceitar novamente
-  exatamente o mesmo QR.
-*/
-
 const BLOQUEIO_MESMO_QR =
   4000;
 
 
-/*
-  Intervalo entre tentativas
-  de leitura.
-*/
-
 const INTERVALO_SCANNER =
   120;
 
-
-/*
-  Largura usada internamente
-  para analisar o vídeo.
-
-  Reduzir a imagem ajuda o celular
-  a processar mais rapidamente.
-*/
 
 const LARGURA_ANALISE =
   720;
@@ -822,19 +798,6 @@ async function iniciarCamera() {
   try {
 
 
-    if (
-      !navigator.mediaDevices ||
-      !navigator.mediaDevices.getUserMedia
-    ) {
-
-      throw new Error(
-        "Este navegador não oferece suporte à câmera."
-      );
-
-    }
-
-
-
     pararCamera();
 
 
@@ -880,22 +843,18 @@ async function iniciarCamera() {
 
 
 
-    if (
+    status.innerText =
+
       cameraAtual ===
       "environment"
-    ) {
 
-      status.innerText =
-        "Câmera traseira pronta. Aguardando QR Code.";
+        ?
 
-    }
+      "Câmera traseira pronta. Aguardando QR Code."
 
-    else {
+        :
 
-      status.innerText =
-        "Câmera frontal pronta. Aguardando QR Code.";
-
-    }
+      "Câmera frontal pronta. Aguardando QR Code.";
 
 
 
@@ -913,7 +872,6 @@ async function iniciarCamera() {
 
     processando =
       false;
-
 
 
     iniciarScanner();
@@ -988,9 +946,13 @@ function executarScanner() {
 
 
   temporizadorScanner =
+
     setTimeout(
+
       executarScanner,
+
       INTERVALO_SCANNER
+
     );
 
 
@@ -999,7 +961,7 @@ function executarScanner() {
 
 
 /* ==============================
-   LER QR
+   LER QR CODE
    ============================== */
 
 
@@ -1017,7 +979,8 @@ function tentarLerQRCode() {
 
 
   if (
-    typeof jsQR !== "function"
+    typeof jsQR !==
+    "function"
   ) {
 
     document
@@ -1025,7 +988,7 @@ function tentarLerQRCode() {
         "statusCamera"
       )
       .innerText =
-        "Erro: leitor de QR Code não foi carregado.";
+        "Erro: leitor de QR Code não carregado.";
 
     return;
 
@@ -1084,12 +1047,6 @@ function tentarLerQRCode() {
 
   }
 
-
-
-  /*
-    Reduz proporcionalmente
-    para análise.
-  */
 
 
   const largura =
@@ -1188,7 +1145,6 @@ function tentarLerQRCode() {
 
 
     console.error(
-      "Erro no jsQR:",
       erro
     );
 
@@ -1208,8 +1164,7 @@ function tentarLerQRCode() {
 
     const valor =
 
-      codigo.data
-        .trim();
+      codigo.data.trim();
 
 
 
@@ -1226,12 +1181,6 @@ function tentarLerQRCode() {
     const agora =
       Date.now();
 
-
-
-    /*
-      Evita várias leituras
-      consecutivas do mesmo QR.
-    */
 
 
     if (
@@ -1274,12 +1223,118 @@ function tentarLerQRCode() {
 
 
 /* ==============================
+   EXTRAIR TOKEN
+   ============================== */
+
+
+function extrairToken(
+  conteudoQR
+) {
+
+
+  /*
+    CASO 1
+    QR já contém somente HMC0001
+  */
+
+
+  if (
+    /^HMC\d+$/i.test(
+      conteudoQR
+    )
+  ) {
+
+    return conteudoQR
+      .toUpperCase();
+
+  }
+
+
+
+  /*
+    CASO 2
+    QR contém URL com ?token=
+  */
+
+
+  try {
+
+
+    const url =
+      new URL(
+        conteudoQR
+      );
+
+
+    const token =
+      url.searchParams.get(
+        "token"
+      );
+
+
+    if (
+      token
+    ) {
+
+      return token
+        .trim()
+        .toUpperCase();
+
+    }
+
+
+  }
+
+
+  catch (erro) {
+
+    /*
+      Não era uma URL válida.
+      Seguimos para próxima tentativa.
+    */
+
+  }
+
+
+
+  /*
+    CASO 3
+    Procura token dentro de qualquer texto.
+  */
+
+
+  const encontrado =
+
+    conteudoQR.match(
+      /HMC\d+/i
+    );
+
+
+  if (
+    encontrado
+  ) {
+
+    return encontrado[0]
+      .toUpperCase();
+
+  }
+
+
+
+  return null;
+
+
+}
+
+
+
+/* ==============================
    QR DETECTADO
    ============================== */
 
 
 function qrDetectado(
-  valor
+  conteudoQR
 ) {
 
 
@@ -1307,34 +1362,72 @@ function qrDetectado(
 
 
 
+  const token =
+    extrairToken(
+      conteudoQR
+    );
+
+
+
   mira.classList.add(
     "detectado"
   );
 
 
 
-  status.innerText =
-    "QR Code identificado!";
+  if (
+    token
+  ) {
 
 
-
-  resultado.innerText =
-    "QR CODE LIDO: " +
-    valor;
+    status.innerText =
+      "QR Code identificado!";
 
 
+    resultado.innerHTML =
 
-  resultado.style.display =
-    "block";
+      "TOKEN IDENTIFICADO:" +
+
+      "<span class='token'>" +
+
+      token +
+
+      "</span>";
 
 
+    resultado.style.display =
+      "block";
 
-  /*
-    Apenas para teste.
 
-    Ainda NÃO envia para
-    o Apps Script.
-  */
+    /*
+      Ainda não envia para
+      o Apps Script.
+
+      Essa será a próxima etapa.
+    */
+
+
+  }
+
+
+  else {
+
+
+    status.innerText =
+      "QR Code inválido.";
+
+
+    resultado.innerHTML =
+
+      "Não foi possível identificar um token HMC neste QR Code.";
+
+
+    resultado.style.display =
+      "block";
+
+
+  }
+
 
 
   setTimeout(
@@ -1352,6 +1445,7 @@ function qrDetectado(
 
 
       status.innerText =
+
         cameraAtual ===
         "environment"
 
@@ -1399,22 +1493,18 @@ async function trocarCamera() {
 
 
 
-  if (
+  cameraAtual =
+
     cameraAtual ===
     "environment"
-  ) {
 
-    cameraAtual =
-      "user";
+      ?
 
-  }
+    "user"
 
-  else {
+      :
 
-    cameraAtual =
-      "environment";
-
-  }
+    "environment";
 
 
 
@@ -1509,7 +1599,7 @@ function cancelarScanner() {
 
 
 /* ==============================
-   SAÍDA DA PÁGINA
+   FECHAR PÁGINA
    ============================== */
 
 
