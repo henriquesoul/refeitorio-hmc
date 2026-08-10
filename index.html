@@ -16,9 +16,7 @@
     name="theme-color"
     content="#063b75">
 
-  <title>
-    Controle de Refeitório HMC
-  </title>
+  <title>Controle de Refeitório HMC</title>
 
 
   <style>
@@ -27,10 +25,8 @@
       box-sizing: border-box;
     }
 
-
     html,
     body {
-
       margin: 0;
       padding: 0;
 
@@ -47,17 +43,13 @@
       background: #f4f7fb;
 
       color: #17345c;
-
     }
-
 
     body {
       height: 100dvh;
     }
 
-
     .app {
-
       width: 100%;
       height: 100dvh;
 
@@ -65,7 +57,6 @@
       flex-direction: column;
 
       overflow: hidden;
-
     }
 
 
@@ -74,7 +65,6 @@
        ============================== */
 
     .topo {
-
       flex: 0 0 auto;
 
       background:
@@ -92,40 +82,28 @@
         clamp(10px, 2vh, 18px)
         12px
         clamp(10px, 2vh, 16px);
-
     }
 
-
     .hmc {
-
       font-size:
         clamp(28px, 7vw, 42px);
 
       font-weight: 900;
-
       letter-spacing: 2px;
-
       line-height: 1;
-
     }
 
-
     .hospital {
-
       margin-top: 5px;
 
       font-size:
         clamp(9px, 2.4vw, 13px);
 
       font-weight: 600;
-
       line-height: 1.2;
-
     }
 
-
     .titulo {
-
       margin-top:
         clamp(8px, 1.8vh, 14px);
 
@@ -133,11 +111,8 @@
         clamp(16px, 4.5vw, 22px);
 
       font-weight: 800;
-
       line-height: 1.1;
-
     }
-
 
 
     /* ==============================
@@ -145,15 +120,12 @@
        ============================== */
 
     .conteudo {
-
       flex: 1 1 auto;
 
       min-height: 0;
 
       display: flex;
-
       flex-direction: column;
-
       align-items: center;
 
       padding:
@@ -162,33 +134,23 @@
         clamp(8px, 1.5vh, 12px);
 
       overflow: hidden;
-
     }
-
 
     .instrucao-area {
-
       flex: 0 0 auto;
-
       text-align: center;
-
     }
 
-
     .icone {
-
       font-size:
         clamp(24px, 6vw, 36px);
 
       line-height: 1;
 
       margin-bottom: 5px;
-
     }
 
-
     .instrucao {
-
       font-size:
         clamp(19px, 5vw, 28px);
 
@@ -197,21 +159,16 @@
       font-weight: 900;
 
       color: #073f7d;
-
     }
 
-
     .subinstrucao {
-
       margin-top: 4px;
 
       font-size:
         clamp(14px, 3.8vw, 18px);
 
       color: #555;
-
     }
-
 
 
     /* ==============================
@@ -219,7 +176,6 @@
        ============================== */
 
     .camera-card {
-
       flex: 1 1 auto;
 
       min-height: 0;
@@ -243,14 +199,10 @@
         rgba(0, 0, 0, 0.10);
 
       display: flex;
-
       flex-direction: column;
-
     }
 
-
     .camera {
-
       position: relative;
 
       flex: 1 1 auto;
@@ -265,12 +217,9 @@
         clamp(10px, 3vw, 16px);
 
       overflow: hidden;
-
     }
 
-
     video {
-
       display: block;
 
       width: 100%;
@@ -279,24 +228,17 @@
       object-fit: cover;
 
       background: #111;
-
     }
-
 
     #canvas {
-
       display: none;
-
     }
 
-
     .mira {
-
       position: absolute;
 
       top: 12%;
       bottom: 12%;
-
       left: 12%;
       right: 12%;
 
@@ -311,25 +253,27 @@
       pointer-events: none;
 
       transition:
-        border-color 0.2s,
-        box-shadow 0.2s;
-
+        border-color .2s,
+        box-shadow .2s;
     }
 
-
     .mira.detectado {
-
       border-color: #16a34a;
 
       box-shadow:
         0 0 0 3px
-        rgba(22, 163, 74, 0.20);
-
+        rgba(22, 163, 74, .20);
     }
 
+    .mira.erro {
+      border-color: #b00020;
+    }
+
+    .mira.aviso {
+      border-color: #d97706;
+    }
 
     .status-camera {
-
       flex: 0 0 auto;
 
       margin-top: 7px;
@@ -344,9 +288,7 @@
       text-align: center;
 
       color: #667085;
-
     }
-
 
 
     /* ==============================
@@ -354,7 +296,6 @@
        ============================== */
 
     .resultado {
-
       display: none;
 
       flex: 0 0 auto;
@@ -362,13 +303,6 @@
       margin-top: 7px;
 
       padding: 10px;
-
-      background: #eaf7ee;
-
-      color: #16833d;
-
-      border:
-        1px solid #b8dfc3;
 
       border-radius: 10px;
 
@@ -382,27 +316,70 @@
       font-weight: 800;
 
       word-break: break-word;
-
     }
 
-
-    .token {
-
+    .resultado.processando {
       display: block;
 
-      margin-top: 4px;
+      background: #e8f2ff;
+      color: #07549a;
+      border: 1px solid #9bc4eb;
+    }
+
+    .resultado.sucesso {
+      display: block;
+
+      background: #eaf7ee;
+      color: #16833d;
+      border: 1px solid #b8dfc3;
+    }
+
+    .resultado.aviso {
+      display: block;
+
+      background: #fff6e5;
+      color: #a35c00;
+      border: 1px solid #efc77e;
+    }
+
+    .resultado.erro {
+      display: block;
+
+      background: #fdecec;
+      color: #a0001d;
+      border: 1px solid #e8a9b2;
+    }
+
+    .resultado-titulo {
+      display: block;
 
       font-size:
-        clamp(18px, 5vw, 24px);
+        clamp(17px, 4.5vw, 23px);
 
       font-weight: 900;
 
-      color: #0d6f32;
-
-      letter-spacing: 1px;
-
+      margin-bottom: 5px;
     }
 
+    .resultado-nome {
+      display: block;
+
+      font-size:
+        clamp(17px, 4.5vw, 22px);
+
+      font-weight: 900;
+    }
+
+    .resultado-detalhe {
+      display: block;
+
+      margin-top: 3px;
+
+      font-size:
+        clamp(11px, 3vw, 15px);
+
+      font-weight: 700;
+    }
 
 
     /* ==============================
@@ -410,7 +387,6 @@
        ============================== */
 
     .botoes {
-
       flex: 0 0 auto;
 
       width:
@@ -424,18 +400,14 @@
       gap: 8px;
 
       justify-content: center;
-
     }
 
-
     .botao {
-
       flex: 1;
 
       min-height: 44px;
 
-      padding:
-        10px 12px;
+      padding: 10px 12px;
 
       border: none;
 
@@ -453,29 +425,19 @@
       cursor: pointer;
 
       touch-action: manipulation;
-
     }
-
 
     .botao:active {
-
-      transform:
-        scale(0.98);
-
+      transform: scale(.98);
     }
 
-
     .botao-secundario {
-
       background: #e8f2ff;
 
       color: #07549a;
 
-      border:
-        2px solid #07549a;
-
+      border: 2px solid #07549a;
     }
-
 
 
     /* ==============================
@@ -483,7 +445,6 @@
        ============================== */
 
     .rodape {
-
       flex: 0 0 auto;
 
       background: #063b75;
@@ -500,9 +461,17 @@
         clamp(9px, 2.5vw, 12px);
 
       line-height: 1.25;
-
     }
 
+
+    /* IFRAME DO APPS SCRIPT */
+
+    #frameAppsScript {
+      display: none;
+      width: 0;
+      height: 0;
+      border: 0;
+    }
 
 
     @media (max-height: 650px) {
@@ -530,7 +499,6 @@
       .botoes {
         margin-top: 5px;
       }
-
     }
 
 
@@ -545,7 +513,6 @@
         width:
           min(58vw, 520px);
       }
-
     }
 
   </style>
@@ -566,18 +533,15 @@
       HMC
     </div>
 
-
     <div class="hospital">
       Hospital Municipal Gov. Mário Covas Júnior
     </div>
-
 
     <div class="titulo">
       CONTROLE DE REFEITÓRIO
     </div>
 
   </header>
-
 
 
   <main class="conteudo">
@@ -589,11 +553,9 @@
         🍴
       </div>
 
-
       <div class="instrucao">
         APONTE O QR CODE
       </div>
-
 
       <div class="subinstrucao">
         para a câmera
@@ -602,12 +564,10 @@
     </div>
 
 
-
     <div class="camera-card">
 
 
       <div class="camera">
-
 
         <video
           id="video"
@@ -616,20 +576,14 @@
           playsinline>
         </video>
 
-
-        <canvas
-          id="canvas">
-        </canvas>
-
+        <canvas id="canvas"></canvas>
 
         <div
           class="mira"
           id="mira">
         </div>
 
-
       </div>
-
 
 
       <div
@@ -641,20 +595,16 @@
       </div>
 
 
-
       <div
         class="resultado"
         id="resultado">
-
       </div>
 
 
     </div>
 
 
-
     <div class="botoes">
-
 
       <button
         class="botao"
@@ -664,7 +614,6 @@
         ATIVAR CÂMERA
 
       </button>
-
 
 
       <button
@@ -677,12 +626,16 @@
 
       </button>
 
-
     </div>
 
 
-  </main>
+    <iframe
+      id="frameAppsScript"
+      title="Comunicação com servidor">
+    </iframe>
 
+
+  </main>
 
 
   <footer class="rodape">
@@ -709,41 +662,17 @@
 <script>
 
 
-/* ==============================
-   VARIÁVEIS
-   ============================== */
+/* ======================================================
+   CONFIGURAÇÃO
+   ====================================================== */
 
 
-let streamCamera = null;
-
-
-let cameraAtual =
-  "environment";
-
-
-let scannerLigado =
-  false;
-
-
-let processando =
-  false;
-
-
-let temporizadorScanner =
-  null;
-
-
-let ultimoCodigo =
-  "";
-
-
-let horarioUltimaLeitura =
-  0;
-
+const URL_APPS_SCRIPT =
+  "https://script.google.com/macros/s/AKfycbyYAOJ5c4ytDRmk8UmLBcYdK0b0dK9jVyevyiY2taf4RyC3G_46gVhx3LeTsFSQPiiE/exec";
 
 
 const BLOQUEIO_MESMO_QR =
-  4000;
+  10000;
 
 
 const INTERVALO_SCANNER =
@@ -754,10 +683,51 @@ const LARGURA_ANALISE =
   720;
 
 
+const TEMPO_RESULTADO =
+  4000;
 
-/* ==============================
+
+const TEMPO_LIMITE_SERVIDOR =
+  12000;
+
+
+
+/* ======================================================
+   VARIÁVEIS
+   ====================================================== */
+
+
+let streamCamera = null;
+
+let cameraAtual =
+  "environment";
+
+let scannerLigado =
+  false;
+
+let processando =
+  false;
+
+let temporizadorScanner =
+  null;
+
+let temporizadorServidor =
+  null;
+
+let ultimoCodigo =
+  "";
+
+let horarioUltimaLeitura =
+  0;
+
+let tokenEmProcessamento =
+  "";
+
+
+
+/* ======================================================
    INICIAR CÂMERA
-   ============================== */
+   ====================================================== */
 
 
 async function iniciarCamera() {
@@ -781,14 +751,7 @@ async function iniciarCamera() {
     );
 
 
-  const resultado =
-    document.getElementById(
-      "resultado"
-    );
-
-
-  resultado.style.display =
-    "none";
+  limparResultado();
 
 
   status.innerText =
@@ -801,9 +764,7 @@ async function iniciarCamera() {
     pararCamera();
 
 
-
     streamCamera =
-
       await navigator.mediaDevices
         .getUserMedia({
 
@@ -828,7 +789,6 @@ async function iniciarCamera() {
         });
 
 
-
     const video =
       document.getElementById(
         "video"
@@ -842,20 +802,8 @@ async function iniciarCamera() {
     await video.play();
 
 
-
     status.innerText =
-
-      cameraAtual ===
-      "environment"
-
-        ?
-
-      "Câmera traseira pronta. Aguardando QR Code."
-
-        :
-
-      "Câmera frontal pronta. Aguardando QR Code.";
-
+      textoCameraPronta();
 
 
     btnCamera.style.display =
@@ -906,9 +854,33 @@ async function iniciarCamera() {
 
 
 
-/* ==============================
+/* ======================================================
+   TEXTO CÂMERA
+   ====================================================== */
+
+
+function textoCameraPronta() {
+
+
+  return cameraAtual ===
+    "environment"
+
+      ?
+
+    "Câmera traseira pronta. Aguardando QR Code."
+
+      :
+
+    "Câmera frontal pronta. Aguardando QR Code.";
+
+
+}
+
+
+
+/* ======================================================
    SCANNER
-   ============================== */
+   ====================================================== */
 
 
 function iniciarScanner() {
@@ -940,19 +912,13 @@ function executarScanner() {
   }
 
 
-
   tentarLerQRCode();
 
 
-
   temporizadorScanner =
-
     setTimeout(
-
       executarScanner,
-
       INTERVALO_SCANNER
-
     );
 
 
@@ -960,9 +926,9 @@ function executarScanner() {
 
 
 
-/* ==============================
+/* ======================================================
    LER QR CODE
-   ============================== */
+   ====================================================== */
 
 
 function tentarLerQRCode() {
@@ -975,7 +941,6 @@ function tentarLerQRCode() {
     return;
 
   }
-
 
 
   if (
@@ -995,7 +960,6 @@ function tentarLerQRCode() {
   }
 
 
-
   const video =
     document.getElementById(
       "video"
@@ -1010,7 +974,6 @@ function tentarLerQRCode() {
     return;
 
   }
-
 
 
   const canvas =
@@ -1028,14 +991,12 @@ function tentarLerQRCode() {
     );
 
 
-
   const larguraOriginal =
     video.videoWidth;
 
 
   const alturaOriginal =
     video.videoHeight;
-
 
 
   if (
@@ -1048,30 +1009,23 @@ function tentarLerQRCode() {
   }
 
 
-
   const largura =
-
     Math.min(
       larguraOriginal,
       LARGURA_ANALISE
     );
 
 
-
   const proporcao =
-
     largura /
     larguraOriginal;
 
 
-
   const altura =
-
     Math.round(
       alturaOriginal *
       proporcao
     );
-
 
 
   canvas.width =
@@ -1082,59 +1036,39 @@ function tentarLerQRCode() {
     altura;
 
 
-
   contexto.drawImage(
-
     video,
-
     0,
     0,
-
     largura,
     altura
-
   );
 
 
-
   const imagem =
-
     contexto.getImageData(
-
       0,
       0,
-
       largura,
       altura
-
     );
 
 
-
   let codigo = null;
-
 
 
   try {
 
 
     codigo =
-
       jsQR(
-
         imagem.data,
-
         imagem.width,
-
         imagem.height,
-
         {
-
           inversionAttempts:
             "attemptBoth"
-
         }
-
       );
 
 
@@ -1155,7 +1089,6 @@ function tentarLerQRCode() {
   }
 
 
-
   if (
     codigo &&
     codigo.data
@@ -1163,9 +1096,7 @@ function tentarLerQRCode() {
 
 
     const valor =
-
       codigo.data.trim();
-
 
 
     if (
@@ -1177,10 +1108,8 @@ function tentarLerQRCode() {
     }
 
 
-
     const agora =
       Date.now();
-
 
 
     if (
@@ -1200,14 +1129,12 @@ function tentarLerQRCode() {
     }
 
 
-
     ultimoCodigo =
       valor;
 
 
     horarioUltimaLeitura =
       agora;
-
 
 
     qrDetectado(
@@ -1222,9 +1149,9 @@ function tentarLerQRCode() {
 
 
 
-/* ==============================
+/* ======================================================
    EXTRAIR TOKEN
-   ============================== */
+   ====================================================== */
 
 
 function extrairToken(
@@ -1233,8 +1160,7 @@ function extrairToken(
 
 
   /*
-    CASO 1
-    QR já contém somente HMC0001
+    QR contendo apenas HMC0001
   */
 
 
@@ -1245,15 +1171,14 @@ function extrairToken(
   ) {
 
     return conteudoQR
+      .trim()
       .toUpperCase();
 
   }
 
 
-
   /*
-    CASO 2
-    QR contém URL com ?token=
+    QR contendo URL ?token=HMC0001
   */
 
 
@@ -1288,23 +1213,17 @@ function extrairToken(
 
   catch (erro) {
 
-    /*
-      Não era uma URL válida.
-      Seguimos para próxima tentativa.
-    */
+    // Não era URL.
 
   }
 
 
-
   /*
-    CASO 3
-    Procura token dentro de qualquer texto.
+    Procura HMC0001 em qualquer texto.
   */
 
 
   const encontrado =
-
     conteudoQR.match(
       /HMC\d+/i
     );
@@ -1320,7 +1239,6 @@ function extrairToken(
   }
 
 
-
   return null;
 
 
@@ -1328,9 +1246,9 @@ function extrairToken(
 
 
 
-/* ==============================
+/* ======================================================
    QR DETECTADO
-   ============================== */
+   ====================================================== */
 
 
 function qrDetectado(
@@ -1342,16 +1260,35 @@ function qrDetectado(
     true;
 
 
+  const token =
+    extrairToken(
+      conteudoQR
+    );
+
+
+  if (
+    !token
+  ) {
+
+
+    mostrarErroLocal(
+      "QR CODE INVÁLIDO",
+      "Não foi possível identificar um token HMC."
+    );
+
+
+    return;
+
+  }
+
+
+  tokenEmProcessamento =
+    token;
+
 
   const status =
     document.getElementById(
       "statusCamera"
-    );
-
-
-  const resultado =
-    document.getElementById(
-      "resultado"
     );
 
 
@@ -1361,12 +1298,10 @@ function qrDetectado(
     );
 
 
-
-  const token =
-    extrairToken(
-      conteudoQR
-    );
-
+  mira.classList.remove(
+    "erro",
+    "aviso"
+  );
 
 
   mira.classList.add(
@@ -1374,98 +1309,514 @@ function qrDetectado(
   );
 
 
+  status.innerText =
+    "QR Code identificado. Validando...";
 
-  if (
+
+  mostrarProcessando(
     token
-  ) {
+  );
 
 
-    status.innerText =
-      "QR Code identificado!";
+  enviarTokenAoServidor(
+    token
+  );
 
 
-    resultado.innerHTML =
-
-      "TOKEN IDENTIFICADO:" +
-
-      "<span class='token'>" +
-
-      token +
-
-      "</span>";
+}
 
 
-    resultado.style.display =
-      "block";
+
+/* ======================================================
+   ENVIAR TOKEN AO APPS SCRIPT
+   ====================================================== */
+
+
+function enviarTokenAoServidor(
+  token
+) {
+
+
+  limparTemporizadorServidor();
+
+
+  const frame =
+    document.getElementById(
+      "frameAppsScript"
+    );
+
+
+  /*
+    nonce evita cache.
+  */
+
+
+  const url =
+    URL_APPS_SCRIPT +
+
+    "?token=" +
+
+    encodeURIComponent(
+      token
+    ) +
+
+    "&modo=totem" +
+
+    "&nonce=" +
+
+    Date.now();
+
+
+  frame.src =
+    url;
+
+
+  temporizadorServidor =
+    setTimeout(
+
+      function() {
+
+
+        mostrarErroLocal(
+          "FALHA DE COMUNICAÇÃO",
+          "O servidor não respondeu. Tente novamente."
+        );
+
+
+      },
+
+      TEMPO_LIMITE_SERVIDOR
+
+    );
+
+
+}
+
+
+
+/* ======================================================
+   RECEBER RESPOSTA DO APPS SCRIPT
+   ====================================================== */
+
+
+window.addEventListener(
+
+  "message",
+
+  function(event) {
 
 
     /*
-      Ainda não envia para
-      o Apps Script.
-
-      Essa será a próxima etapa.
+      Aceita somente mensagens
+      originadas de serviços Google.
     */
 
 
+    if (
+      !origemGoogleValida(
+        event.origin
+      )
+    ) {
+
+      return;
+
+    }
+
+
+    const dados =
+      event.data;
+
+
+    if (
+      !dados ||
+      typeof dados !== "object"
+    ) {
+
+      return;
+
+    }
+
+
+    if (
+      dados.fonte !==
+      "HMC_REFEITORIO"
+    ) {
+
+      return;
+
+    }
+
+
+    /*
+      Ignora uma resposta antiga.
+    */
+
+
+    if (
+      tokenEmProcessamento &&
+      dados.token &&
+      String(
+        dados.token
+      ).toUpperCase() !==
+      tokenEmProcessamento
+    ) {
+
+      return;
+
+    }
+
+
+    limparTemporizadorServidor();
+
+
+    tratarRespostaServidor(
+      dados
+    );
+
+
+  }
+
+);
+
+
+
+/* ======================================================
+   VALIDAR ORIGEM GOOGLE
+   ====================================================== */
+
+
+function origemGoogleValida(
+  origem
+) {
+
+
+  try {
+
+
+    const url =
+      new URL(
+        origem
+      );
+
+
+    const host =
+      url.hostname;
+
+
+    return (
+
+      host ===
+        "script.google.com"
+
+      ||
+
+      host ===
+        "script.googleusercontent.com"
+
+      ||
+
+      host.endsWith(
+        ".googleusercontent.com"
+      )
+
+    );
+
+
   }
 
 
-  else {
+  catch (erro) {
 
 
-    status.innerText =
-      "QR Code inválido.";
-
-
-    resultado.innerHTML =
-
-      "Não foi possível identificar um token HMC neste QR Code.";
-
-
-    resultado.style.display =
-      "block";
+    return false;
 
 
   }
 
+
+}
+
+
+
+/* ======================================================
+   TRATAR RESPOSTA
+   ====================================================== */
+
+
+function tratarRespostaServidor(
+  dados
+) {
+
+
+  const status =
+    String(
+      dados.status || ""
+    );
+
+
+  if (
+    status === "SUCESSO"
+  ) {
+
+
+    mostrarResposta(
+      dados,
+      "sucesso"
+    );
+
+
+    return;
+
+  }
+
+
+  if (
+    status === "DUPLICADO" ||
+    status === "FORA_HORARIO"
+  ) {
+
+
+    mostrarResposta(
+      dados,
+      "aviso"
+    );
+
+
+    return;
+
+  }
+
+
+  mostrarResposta(
+    dados,
+    "erro"
+  );
+
+
+}
+
+
+
+/* ======================================================
+   MOSTRAR PROCESSANDO
+   ====================================================== */
+
+
+function mostrarProcessando(
+  token
+) {
+
+
+  const resultado =
+    document.getElementById(
+      "resultado"
+    );
+
+
+  resultado.className =
+    "resultado processando";
+
+
+  resultado.innerHTML =
+
+    "<span class='resultado-titulo'>" +
+      "VALIDANDO..." +
+    "</span>" +
+
+    "<span class='resultado-detalhe'>" +
+      token +
+    "</span>";
+
+
+}
+
+
+
+/* ======================================================
+   MOSTRAR RESPOSTA DO SERVIDOR
+   ====================================================== */
+
+
+function mostrarResposta(
+  dados,
+  tipo
+) {
+
+
+  const resultado =
+    document.getElementById(
+      "resultado"
+    );
+
+
+  const statusCamera =
+    document.getElementById(
+      "statusCamera"
+    );
+
+
+  const mira =
+    document.getElementById(
+      "mira"
+    );
+
+
+  mira.classList.remove(
+    "detectado",
+    "erro",
+    "aviso"
+  );
+
+
+  if (
+    tipo === "sucesso"
+  ) {
+
+    mira.classList.add(
+      "detectado"
+    );
+
+  }
+
+
+  if (
+    tipo === "aviso"
+  ) {
+
+    mira.classList.add(
+      "aviso"
+    );
+
+  }
+
+
+  if (
+    tipo === "erro"
+  ) {
+
+    mira.classList.add(
+      "erro"
+    );
+
+  }
+
+
+  resultado.className =
+    "resultado " +
+    tipo;
+
+
+  let html =
+
+    "<span class='resultado-titulo'>" +
+
+      escaparHtml(
+        dados.titulo || ""
+      ) +
+
+    "</span>";
+
+
+  if (
+    dados.nome
+  ) {
+
+    html +=
+
+      "<span class='resultado-nome'>" +
+
+        escaparHtml(
+          dados.nome
+        ) +
+
+      "</span>";
+
+  }
+
+
+  if (
+    dados.setor
+  ) {
+
+    html +=
+
+      "<span class='resultado-detalhe'>" +
+
+        escaparHtml(
+          dados.setor
+        ) +
+
+      "</span>";
+
+  }
+
+
+  if (
+    dados.refeicao
+  ) {
+
+    html +=
+
+      "<span class='resultado-detalhe'>" +
+
+        escaparHtml(
+          dados.refeicao
+        ) +
+
+      "</span>";
+
+  }
+
+
+  if (
+    dados.hora
+  ) {
+
+    html +=
+
+      "<span class='resultado-detalhe'>" +
+
+        escaparHtml(
+          dados.hora
+        ) +
+
+      "</span>";
+
+  }
+
+
+  if (
+    dados.mensagem &&
+    dados.status !== "SUCESSO"
+  ) {
+
+    html +=
+
+      "<span class='resultado-detalhe'>" +
+
+        escaparHtml(
+          dados.mensagem
+        ) +
+
+      "</span>";
+
+  }
+
+
+  resultado.innerHTML =
+    html;
+
+
+  statusCamera.innerText =
+    dados.titulo ||
+    "Resultado recebido.";
 
 
   setTimeout(
 
-    function() {
+    voltarAoScanner,
 
-
-      resultado.style.display =
-        "none";
-
-
-      mira.classList.remove(
-        "detectado"
-      );
-
-
-      status.innerText =
-
-        cameraAtual ===
-        "environment"
-
-          ?
-
-        "Câmera traseira pronta. Aguardando QR Code."
-
-          :
-
-        "Câmera frontal pronta. Aguardando QR Code.";
-
-
-
-      processando =
-        false;
-
-
-    },
-
-    3000
+    TEMPO_RESULTADO
 
   );
 
@@ -1474,12 +1825,176 @@ function qrDetectado(
 
 
 
-/* ==============================
+/* ======================================================
+   ERRO LOCAL
+   ====================================================== */
+
+
+function mostrarErroLocal(
+  titulo,
+  mensagem
+) {
+
+
+  limparTemporizadorServidor();
+
+
+  const resultado =
+    document.getElementById(
+      "resultado"
+    );
+
+
+  const status =
+    document.getElementById(
+      "statusCamera"
+    );
+
+
+  const mira =
+    document.getElementById(
+      "mira"
+    );
+
+
+  mira.classList.remove(
+    "detectado",
+    "aviso"
+  );
+
+
+  mira.classList.add(
+    "erro"
+  );
+
+
+  resultado.className =
+    "resultado erro";
+
+
+  resultado.innerHTML =
+
+    "<span class='resultado-titulo'>" +
+
+      escaparHtml(
+        titulo
+      ) +
+
+    "</span>" +
+
+    "<span class='resultado-detalhe'>" +
+
+      escaparHtml(
+        mensagem
+      ) +
+
+    "</span>";
+
+
+  status.innerText =
+    titulo;
+
+
+  setTimeout(
+
+    voltarAoScanner,
+
+    TEMPO_RESULTADO
+
+  );
+
+
+}
+
+
+
+/* ======================================================
+   VOLTAR AO PRÓXIMO COLABORADOR
+   ====================================================== */
+
+
+function voltarAoScanner() {
+
+
+  limparResultado();
+
+
+  const mira =
+    document.getElementById(
+      "mira"
+    );
+
+
+  const status =
+    document.getElementById(
+      "statusCamera"
+    );
+
+
+  mira.classList.remove(
+    "detectado",
+    "erro",
+    "aviso"
+  );
+
+
+  status.innerText =
+    textoCameraPronta();
+
+
+  tokenEmProcessamento =
+    "";
+
+
+  processando =
+    false;
+
+
+}
+
+
+
+/* ======================================================
+   LIMPAR RESULTADO
+   ====================================================== */
+
+
+function limparResultado() {
+
+
+  const resultado =
+    document.getElementById(
+      "resultado"
+    );
+
+
+  resultado.className =
+    "resultado";
+
+
+  resultado.innerHTML =
+    "";
+
+
+}
+
+
+
+/* ======================================================
    TROCAR CÂMERA
-   ============================== */
+   ====================================================== */
 
 
 async function trocarCamera() {
+
+
+  if (
+    processando
+  ) {
+
+    return;
+
+  }
 
 
   const status =
@@ -1492,9 +2007,7 @@ async function trocarCamera() {
     "Trocando câmera...";
 
 
-
   cameraAtual =
-
     cameraAtual ===
     "environment"
 
@@ -1507,14 +2020,12 @@ async function trocarCamera() {
     "environment";
 
 
-
   ultimoCodigo =
     "";
 
 
   horarioUltimaLeitura =
     0;
-
 
 
   await iniciarCamera();
@@ -1524,9 +2035,9 @@ async function trocarCamera() {
 
 
 
-/* ==============================
+/* ======================================================
    PARAR CÂMERA
-   ============================== */
+   ====================================================== */
 
 
 function pararCamera() {
@@ -1537,7 +2048,6 @@ function pararCamera() {
 
 
   cancelarScanner();
-
 
 
   if (
@@ -1569,9 +2079,9 @@ function pararCamera() {
 
 
 
-/* ==============================
+/* ======================================================
    CANCELAR SCANNER
-   ============================== */
+   ====================================================== */
 
 
 function cancelarScanner() {
@@ -1598,9 +2108,82 @@ function cancelarScanner() {
 
 
 
-/* ==============================
+/* ======================================================
+   TEMPORIZADOR DO SERVIDOR
+   ====================================================== */
+
+
+function limparTemporizadorServidor() {
+
+
+  if (
+    temporizadorServidor
+  ) {
+
+
+    clearTimeout(
+      temporizadorServidor
+    );
+
+
+    temporizadorServidor =
+      null;
+
+
+  }
+
+
+}
+
+
+
+/* ======================================================
+   SEGURANÇA DO TEXTO
+   ====================================================== */
+
+
+function escaparHtml(
+  valor
+) {
+
+
+  return String(
+    valor
+  )
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+
+}
+
+
+
+/* ======================================================
    FECHAR PÁGINA
-   ============================== */
+   ====================================================== */
 
 
 window.addEventListener(
@@ -1609,7 +2192,12 @@ window.addEventListener(
 
   function() {
 
+
     pararCamera();
+
+
+    limparTemporizadorServidor();
+
 
   }
 
