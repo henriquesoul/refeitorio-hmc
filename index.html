@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Controle de Refeitório HMC</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f7fb;
+      color: #17345c;
+    }
+
+    body {
+      min-height: 100vh;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topo {
+      background: linear-gradient(135deg, #063b75, #005aa7);
+      color: white;
+      text-align: center;
+      padding: 22px 16px 20px;
+    }
+
+    .hmc {
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .hospital {
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 3px;
+    }
+
+    .titulo {
+      margin-top: 18px;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .conteudo {
+      flex: 1;
+      padding: 22px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .icone {
+      font-size: 42px;
+      margin: 3px 0 15px;
+    }
+
+    .instrucao {
+      font-size: 23px;
+      line-height: 1.25;
+      font-weight: 900;
+      text-align: center;
+      color: #073f7d;
+    }
+
+    .subinstrucao {
+      font-size: 17px;
+      margin-top: 5px;
+      color: #555;
+    }
+
+    .camera-card {
+      width: 100%;
+      max-width: 460px;
+      background: white;
+      margin-top: 22px;
+      border-radius: 22px;
+      padding: 12px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.10);
+    }
+
+    .camera {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      background: #111;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .mira {
+      position: absolute;
+      inset: 13%;
+      border: 4px solid #0d72cc;
+      border-radius: 18px;
+      pointer-events: none;
+    }
+
+    .status-camera {
+      margin-top: 11px;
+      font-size: 14px;
+      text-align: center;
+      color: #667085;
+    }
+
+    .botao-camera {
+      margin-top: 18px;
+      padding: 14px 24px;
+      border: 0;
+      border-radius: 12px;
+      background: #07549a;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .rodape {
+      background: #063b75;
+      color: white;
+      text-align: center;
+      padding: 16px 10px;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <header class="topo">
+      <div class="hmc">HMC</div>
+
+      <div class="hospital">
+        Hospital Municipal Gov. Mário Covas Júnior
+      </div>
+
+      <div class="titulo">
+        CONTROLE DE REFEITÓRIO
+      </div>
+    </header>
+
+    <main class="conteudo">
+
+      <div class="icone">🍴</div>
+
+      <div class="instrucao">
+        APONTE O QR CODE
+      </div>
+
+      <div class="subinstrucao">
+        para a câmera
+      </div>
+
+      <div class="camera-card">
+
+        <div class="camera">
+
+          <video
+            id="video"
+            autoplay
+            muted
+            playsinline>
+          </video>
+
+          <div class="mira"></div>
+
+        </div>
+
+        <div class="status-camera" id="statusCamera">
+          Clique abaixo para iniciar a câmera.
+        </div>
+
+      </div>
+
+      <button
+        class="botao-camera"
+        id="btnCamera"
+        onclick="iniciarCamera()">
+        ATIVAR CÂMERA
+      </button>
+
+    </main>
+
+    <footer class="rodape">
+      HMC • Controle de Refeitório<br>
+      Mantenha este equipamento conectado à energia
+    </footer>
+
+  </div>
+
+
+  <script>
+
+    let streamCamera = null;
+
+    async function iniciarCamera() {
+
+      const status =
+        document.getElementById("statusCamera");
+
+      const botao =
+        document.getElementById("btnCamera");
+
+      status.innerText =
+        "Solicitando acesso à câmera...";
+
+      try {
+
+        if (!navigator.mediaDevices ||
+            !navigator.mediaDevices.getUserMedia) {
+
+          throw new Error(
+            "Este navegador não oferece suporte ao acesso à câmera."
+          );
+
+        }
+
+        streamCamera =
+          await navigator.mediaDevices.getUserMedia({
+            video: {
+              facingMode: {
+                ideal: "environment"
+              }
+            },
+            audio: false
+          });
+
+        const video =
+          document.getElementById("video");
+
+        video.srcObject = streamCamera;
+
+        await video.play();
+
+        status.innerText =
+          "Câmera pronta. Aguardando QR Code.";
+
+        botao.style.display = "none";
+
+      }
+
+      catch (erro) {
+
+        console.error(erro);
+
+        status.innerText =
+          "Erro da câmera: " +
+          erro.name +
+          " - " +
+          erro.message;
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
