@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -10,242 +12,494 @@
              maximum-scale=1.0,
              user-scalable=no">
 
-  <meta name="theme-color" content="#063b75">
+  <meta
+    name="theme-color"
+    content="#063b75">
 
-  <title>Controle de Refeitório HMC</title>
+  <title>
+    Controle de Refeitório HMC
+  </title>
+
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
+
     html,
     body {
+
       margin: 0;
       padding: 0;
+
       width: 100%;
       height: 100%;
+
       overflow: hidden;
-      font-family: Arial, Helvetica, sans-serif;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
       background: #f4f7fb;
+
       color: #17345c;
+
     }
+
 
     body {
       height: 100dvh;
     }
 
+
     .app {
+
       width: 100%;
       height: 100dvh;
+
       display: flex;
       flex-direction: column;
+
       overflow: hidden;
+
     }
 
+
+    /* ==============================
+       CABEÇALHO
+       ============================== */
+
     .topo {
+
       flex: 0 0 auto;
-      background: linear-gradient(
-        135deg,
-        #063b75,
-        #005aa7
-      );
+
+      background:
+        linear-gradient(
+          135deg,
+          #063b75,
+          #005aa7
+        );
+
       color: white;
+
       text-align: center;
+
       padding:
         clamp(10px, 2vh, 18px)
         12px
         clamp(10px, 2vh, 16px);
+
     }
+
 
     .hmc {
+
       font-size:
         clamp(28px, 7vw, 42px);
+
       font-weight: 900;
+
       letter-spacing: 2px;
+
       line-height: 1;
+
     }
+
 
     .hospital {
+
       margin-top: 5px;
+
       font-size:
         clamp(9px, 2.4vw, 13px);
+
       font-weight: 600;
+
       line-height: 1.2;
+
     }
+
 
     .titulo {
+
       margin-top:
         clamp(8px, 1.8vh, 14px);
+
       font-size:
         clamp(16px, 4.5vw, 22px);
+
       font-weight: 800;
+
       line-height: 1.1;
+
     }
 
+
+
+    /* ==============================
+       CONTEÚDO
+       ============================== */
+
     .conteudo {
+
       flex: 1 1 auto;
+
       min-height: 0;
+
       display: flex;
+
       flex-direction: column;
+
       align-items: center;
+
       padding:
         clamp(8px, 1.5vh, 14px)
         14px
         clamp(8px, 1.5vh, 12px);
+
       overflow: hidden;
+
     }
+
 
     .instrucao-area {
+
       flex: 0 0 auto;
+
       text-align: center;
+
     }
+
 
     .icone {
+
       font-size:
         clamp(24px, 6vw, 36px);
+
       line-height: 1;
+
       margin-bottom: 5px;
+
     }
+
 
     .instrucao {
+
       font-size:
         clamp(19px, 5vw, 28px);
+
       line-height: 1.05;
+
       font-weight: 900;
+
       color: #073f7d;
+
     }
+
 
     .subinstrucao {
+
       margin-top: 4px;
+
       font-size:
         clamp(14px, 3.8vw, 18px);
+
       color: #555;
+
     }
+
+
+
+    /* ==============================
+       CÂMERA
+       ============================== */
 
     .camera-card {
+
       flex: 1 1 auto;
+
       min-height: 0;
+
       width:
         min(94vw, 480px);
+
       margin-top:
         clamp(8px, 1.5vh, 14px);
+
       background: white;
+
       border-radius:
         clamp(14px, 4vw, 22px);
+
       padding:
         clamp(7px, 1.5vw, 12px);
+
       box-shadow:
-        0 6px 24px rgba(0, 0, 0, 0.10);
+        0 6px 24px
+        rgba(0, 0, 0, 0.10);
+
       display: flex;
+
       flex-direction: column;
+
     }
+
 
     .camera {
+
       position: relative;
+
       flex: 1 1 auto;
+
       min-height: 0;
+
       width: 100%;
+
       background: #111;
+
       border-radius:
         clamp(10px, 3vw, 16px);
+
       overflow: hidden;
+
     }
+
 
     video {
+
       display: block;
+
       width: 100%;
       height: 100%;
+
       object-fit: cover;
+
       background: #111;
+
     }
 
-    canvas {
+
+    #canvas {
+
       display: none;
+
     }
+
+
+
+    /* Moldura azul */
 
     .mira {
+
       position: absolute;
+
       top: 12%;
       bottom: 12%;
+
       left: 12%;
       right: 12%;
+
       border:
         clamp(3px, 0.7vw, 4px)
         solid
         #0d72cc;
+
       border-radius:
         clamp(12px, 4vw, 20px);
+
       pointer-events: none;
+
+      transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+
     }
+
+
+    /* Moldura verde quando identifica */
+
+    .mira.detectado {
+
+      border-color: #16a34a;
+
+      box-shadow:
+        0 0 0 3px
+        rgba(22, 163, 74, 0.20);
+
+    }
+
+
 
     .status-camera {
+
       flex: 0 0 auto;
+
       margin-top: 7px;
+
       padding: 2px 4px;
+
       font-size:
         clamp(11px, 2.8vw, 14px);
+
       line-height: 1.2;
+
       text-align: center;
+
       color: #667085;
+
     }
 
-    .resultado-leitura {
+
+
+    /* ==============================
+       RESULTADO DO QR
+       ============================== */
+
+    .resultado {
+
       display: none;
+
+      flex: 0 0 auto;
+
       margin-top: 7px;
-      padding: 10px;
+
+      padding: 9px 10px;
+
+      background: #eaf7ee;
+
+      color: #16833d;
+
+      border:
+        1px solid #b8dfc3;
+
       border-radius: 10px;
+
       text-align: center;
-      background: #e8f5e9;
-      color: #157a32;
-      font-weight: 900;
+
       font-size:
-        clamp(13px, 3.5vw, 16px);
+        clamp(11px, 3vw, 15px);
+
+      line-height: 1.25;
+
+      font-weight: 800;
+
+      word-break: break-word;
+
+      max-height: 72px;
+
+      overflow: hidden;
+
     }
+
+
+
+    /* ==============================
+       BOTÕES
+       ============================== */
 
     .botoes {
+
       flex: 0 0 auto;
+
       width:
         min(94vw, 480px);
+
       margin-top:
         clamp(7px, 1.3vh, 12px);
+
       display: flex;
+
       gap: 8px;
+
       justify-content: center;
+
     }
+
 
     .botao {
+
       flex: 1;
+
       min-height: 44px;
-      padding: 10px 12px;
+
+      padding:
+        10px 12px;
+
       border: none;
+
       border-radius: 11px;
+
       background: #07549a;
+
       color: white;
+
       font-size:
         clamp(12px, 3.3vw, 15px);
+
       font-weight: 800;
+
       cursor: pointer;
+
+      touch-action: manipulation;
+
     }
+
+
+    .botao:active {
+
+      transform:
+        scale(0.98);
+
+    }
+
 
     .botao-secundario {
+
       background: #e8f2ff;
+
       color: #07549a;
-      border: 2px solid #07549a;
+
+      border:
+        2px solid #07549a;
+
     }
 
+
+
+    /* ==============================
+       RODAPÉ
+       ============================== */
+
     .rodape {
+
       flex: 0 0 auto;
+
       background: #063b75;
+
       color: white;
+
       text-align: center;
+
       padding:
         clamp(7px, 1.3vh, 11px)
         8px;
+
       font-size:
         clamp(9px, 2.5vw, 12px);
+
       line-height: 1.25;
+
     }
+
+
+
+    /* ==============================
+       TELAS MAIS BAIXAS
+       ============================== */
 
     @media (max-height: 650px) {
 
@@ -269,493 +523,1012 @@
         margin-top: 6px;
       }
 
+      .botoes {
+        margin-top: 5px;
+      }
+
     }
+
+
+
+    /* ==============================
+       TABLETS / NOTEBOOKS
+       ============================== */
 
     @media (min-width: 700px) {
 
       .camera-card {
-        width: min(58vw, 520px);
+        width:
+          min(58vw, 520px);
       }
 
       .botoes {
-        width: min(58vw, 520px);
+        width:
+          min(58vw, 520px);
       }
 
     }
 
   </style>
+
 </head>
+
+
 
 <body>
 
-  <div class="app">
 
-    <header class="topo">
-
-      <div class="hmc">
-        HMC
-      </div>
-
-      <div class="hospital">
-        Hospital Municipal Gov. Mário Covas Júnior
-      </div>
-
-      <div class="titulo">
-        CONTROLE DE REFEITÓRIO
-      </div>
-
-    </header>
+<div class="app">
 
 
-    <main class="conteudo">
+  <header class="topo">
 
-      <div class="instrucao-area">
+    <div class="hmc">
+      HMC
+    </div>
 
-        <div class="icone">
-          🍴
-        </div>
 
-        <div class="instrucao">
-          APONTE O QR CODE
-        </div>
+    <div class="hospital">
+      Hospital Municipal Gov. Mário Covas Júnior
+    </div>
 
-        <div class="subinstrucao">
-          para a câmera
-        </div>
 
+    <div class="titulo">
+      CONTROLE DE REFEITÓRIO
+    </div>
+
+  </header>
+
+
+
+  <main class="conteudo">
+
+
+    <div class="instrucao-area">
+
+      <div class="icone">
+        🍴
       </div>
 
 
-      <div class="camera-card">
+      <div class="instrucao">
+        APONTE O QR CODE
+      </div>
 
-        <div class="camera">
 
-          <video
-            id="video"
-            autoplay
-            muted
-            playsinline>
-          </video>
+      <div class="subinstrucao">
+        para a câmera
+      </div>
 
-          <canvas id="canvas"></canvas>
+    </div>
 
-          <div class="mira"></div>
 
-        </div>
+
+    <div class="camera-card">
+
+
+      <div class="camera">
+
+
+        <video
+          id="video"
+          autoplay
+          muted
+          playsinline>
+        </video>
+
+
+        <canvas
+          id="canvas">
+        </canvas>
 
 
         <div
-          class="status-camera"
-          id="statusCamera">
-
-          Clique em "Ativar câmera".
-
+          class="mira"
+          id="mira">
         </div>
 
-        <div
-          class="resultado-leitura"
-          id="resultadoLeitura">
-        </div>
 
       </div>
 
 
-      <div class="botoes">
 
-        <button
-          class="botao"
-          id="btnCamera"
-          onclick="iniciarCamera()">
+      <div
+        class="status-camera"
+        id="statusCamera">
 
-          ATIVAR CÂMERA
-
-        </button>
-
-
-        <button
-          class="botao botao-secundario"
-          id="btnTrocar"
-          onclick="trocarCamera()"
-          style="display:none;">
-
-          ↻ TROCAR CÂMERA
-
-        </button>
+        Clique em "Ativar câmera".
 
       </div>
 
-    </main>
 
 
-    <footer class="rodape">
+      <div
+        class="resultado"
+        id="resultado">
 
-      HMC • Controle de Refeitório
-      <br>
-
-      Mantenha este equipamento conectado à energia
-
-    </footer>
-
-  </div>
+      </div>
 
 
-  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+    </div>
 
 
-  <script>
 
-    let streamCamera = null;
+    <div class="botoes">
 
-    let cameraAtual =
-      "environment";
 
-    let leituraAtiva =
+      <button
+        class="botao"
+        id="btnCamera"
+        onclick="iniciarCamera()">
+
+        ATIVAR CÂMERA
+
+      </button>
+
+
+
+      <button
+        class="botao botao-secundario"
+        id="btnTrocar"
+        onclick="trocarCamera()"
+        style="display:none;">
+
+        ↻ TROCAR CÂMERA
+
+      </button>
+
+
+    </div>
+
+
+  </main>
+
+
+
+  <footer class="rodape">
+
+    HMC • Controle de Refeitório
+
+    <br>
+
+    Mantenha este equipamento conectado à energia
+
+  </footer>
+
+
+</div>
+
+
+
+<!--
+  Biblioteca responsável
+  por interpretar o QR Code
+-->
+
+<script
+  src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js">
+</script>
+
+
+
+<script>
+
+
+/* ==============================
+   VARIÁVEIS
+   ============================== */
+
+
+let streamCamera = null;
+
+
+let cameraAtual =
+  "environment";
+
+
+let scannerLigado =
+  false;
+
+
+let processando =
+  false;
+
+
+let temporizadorScanner =
+  null;
+
+
+let ultimoCodigo =
+  "";
+
+
+let horarioUltimaLeitura =
+  0;
+
+
+
+/*
+  Tempo mínimo para aceitar novamente
+  exatamente o mesmo QR.
+*/
+
+const BLOQUEIO_MESMO_QR =
+  4000;
+
+
+/*
+  Intervalo entre tentativas
+  de leitura.
+*/
+
+const INTERVALO_SCANNER =
+  120;
+
+
+/*
+  Largura usada internamente
+  para analisar o vídeo.
+
+  Reduzir a imagem ajuda o celular
+  a processar mais rapidamente.
+*/
+
+const LARGURA_ANALISE =
+  720;
+
+
+
+/* ==============================
+   INICIAR CÂMERA
+   ============================== */
+
+
+async function iniciarCamera() {
+
+
+  const status =
+    document.getElementById(
+      "statusCamera"
+    );
+
+
+  const btnCamera =
+    document.getElementById(
+      "btnCamera"
+    );
+
+
+  const btnTrocar =
+    document.getElementById(
+      "btnTrocar"
+    );
+
+
+  const resultado =
+    document.getElementById(
+      "resultado"
+    );
+
+
+  resultado.style.display =
+    "none";
+
+
+  status.innerText =
+    "Solicitando acesso à câmera...";
+
+
+  try {
+
+
+    if (
+      !navigator.mediaDevices ||
+      !navigator.mediaDevices.getUserMedia
+    ) {
+
+      throw new Error(
+        "Este navegador não oferece suporte à câmera."
+      );
+
+    }
+
+
+
+    pararCamera();
+
+
+
+    streamCamera =
+
+      await navigator.mediaDevices
+        .getUserMedia({
+
+          video: {
+
+            facingMode: {
+              ideal: cameraAtual
+            },
+
+            width: {
+              ideal: 1280
+            },
+
+            height: {
+              ideal: 720
+            }
+
+          },
+
+          audio: false
+
+        });
+
+
+
+    const video =
+      document.getElementById(
+        "video"
+      );
+
+
+    video.srcObject =
+      streamCamera;
+
+
+    await video.play();
+
+
+
+    if (
+      cameraAtual ===
+      "environment"
+    ) {
+
+      status.innerText =
+        "Câmera traseira pronta. Aguardando QR Code.";
+
+    }
+
+    else {
+
+      status.innerText =
+        "Câmera frontal pronta. Aguardando QR Code.";
+
+    }
+
+
+
+    btnCamera.style.display =
+      "none";
+
+
+    btnTrocar.style.display =
+      "block";
+
+
+    scannerLigado =
+      true;
+
+
+    processando =
       false;
 
-    let processandoQR =
-      false;
 
 
-    async function iniciarCamera() {
+    iniciarScanner();
 
-      const status =
-        document.getElementById(
-          "statusCamera"
-        );
 
-      const btnCamera =
-        document.getElementById(
-          "btnCamera"
-        );
+  }
 
-      const btnTrocar =
-        document.getElementById(
-          "btnTrocar"
-        );
 
-      const resultado =
-        document.getElementById(
-          "resultadoLeitura"
-        );
+  catch (erro) {
+
+
+    console.error(
+      erro
+    );
+
+
+    status.innerText =
+      "Erro da câmera: " +
+      erro.name +
+      " - " +
+      erro.message;
+
+
+    btnCamera.style.display =
+      "block";
+
+
+  }
+
+
+}
+
+
+
+/* ==============================
+   SCANNER
+   ============================== */
+
+
+function iniciarScanner() {
+
+
+  cancelarScanner();
+
+
+  scannerLigado =
+    true;
+
+
+  executarScanner();
+
+
+}
+
+
+
+function executarScanner() {
+
+
+  if (
+    !scannerLigado
+  ) {
+
+    return;
+
+  }
+
+
+
+  tentarLerQRCode();
+
+
+
+  temporizadorScanner =
+    setTimeout(
+      executarScanner,
+      INTERVALO_SCANNER
+    );
+
+
+}
+
+
+
+/* ==============================
+   LER QR
+   ============================== */
+
+
+function tentarLerQRCode() {
+
+
+  if (
+    processando
+  ) {
+
+    return;
+
+  }
+
+
+
+  if (
+    typeof jsQR !== "function"
+  ) {
+
+    document
+      .getElementById(
+        "statusCamera"
+      )
+      .innerText =
+        "Erro: leitor de QR Code não foi carregado.";
+
+    return;
+
+  }
+
+
+
+  const video =
+    document.getElementById(
+      "video"
+    );
+
+
+  if (
+    video.readyState <
+    video.HAVE_ENOUGH_DATA
+  ) {
+
+    return;
+
+  }
+
+
+
+  const canvas =
+    document.getElementById(
+      "canvas"
+    );
+
+
+  const contexto =
+    canvas.getContext(
+      "2d",
+      {
+        willReadFrequently: true
+      }
+    );
+
+
+
+  const larguraOriginal =
+    video.videoWidth;
+
+
+  const alturaOriginal =
+    video.videoHeight;
+
+
+
+  if (
+    !larguraOriginal ||
+    !alturaOriginal
+  ) {
+
+    return;
+
+  }
+
+
+
+  /*
+    Reduz proporcionalmente
+    para análise.
+  */
+
+
+  const largura =
+
+    Math.min(
+      larguraOriginal,
+      LARGURA_ANALISE
+    );
+
+
+
+  const proporcao =
+
+    largura /
+    larguraOriginal;
+
+
+
+  const altura =
+
+    Math.round(
+      alturaOriginal *
+      proporcao
+    );
+
+
+
+  canvas.width =
+    largura;
+
+
+  canvas.height =
+    altura;
+
+
+
+  contexto.drawImage(
+
+    video,
+
+    0,
+    0,
+
+    largura,
+    altura
+
+  );
+
+
+
+  const imagem =
+
+    contexto.getImageData(
+
+      0,
+      0,
+
+      largura,
+      altura
+
+    );
+
+
+
+  let codigo = null;
+
+
+
+  try {
+
+
+    codigo =
+
+      jsQR(
+
+        imagem.data,
+
+        imagem.width,
+
+        imagem.height,
+
+        {
+
+          inversionAttempts:
+            "attemptBoth"
+
+        }
+
+      );
+
+
+  }
+
+
+  catch (erro) {
+
+
+    console.error(
+      "Erro no jsQR:",
+      erro
+    );
+
+
+    return;
+
+
+  }
+
+
+
+  if (
+    codigo &&
+    codigo.data
+  ) {
+
+
+    const valor =
+
+      codigo.data
+        .trim();
+
+
+
+    if (
+      !valor
+    ) {
+
+      return;
+
+    }
+
+
+
+    const agora =
+      Date.now();
+
+
+
+    /*
+      Evita várias leituras
+      consecutivas do mesmo QR.
+    */
+
+
+    if (
+
+      valor ===
+      ultimoCodigo &&
+
+      agora -
+      horarioUltimaLeitura
+      <
+      BLOQUEIO_MESMO_QR
+
+    ) {
+
+      return;
+
+    }
+
+
+
+    ultimoCodigo =
+      valor;
+
+
+    horarioUltimaLeitura =
+      agora;
+
+
+
+    qrDetectado(
+      valor
+    );
+
+
+  }
+
+
+}
+
+
+
+/* ==============================
+   QR DETECTADO
+   ============================== */
+
+
+function qrDetectado(
+  valor
+) {
+
+
+  processando =
+    true;
+
+
+
+  const status =
+    document.getElementById(
+      "statusCamera"
+    );
+
+
+  const resultado =
+    document.getElementById(
+      "resultado"
+    );
+
+
+  const mira =
+    document.getElementById(
+      "mira"
+    );
+
+
+
+  mira.classList.add(
+    "detectado"
+  );
+
+
+
+  status.innerText =
+    "QR Code identificado!";
+
+
+
+  resultado.innerText =
+    "QR CODE LIDO: " +
+    valor;
+
+
+
+  resultado.style.display =
+    "block";
+
+
+
+  /*
+    Apenas para teste.
+
+    Ainda NÃO envia para
+    o Apps Script.
+  */
+
+
+  setTimeout(
+
+    function() {
 
 
       resultado.style.display =
         "none";
 
 
-      status.innerText =
-        "Solicitando acesso à câmera...";
-
-
-      try {
-
-        pararCamera();
-
-
-        streamCamera =
-          await navigator.mediaDevices
-            .getUserMedia({
-
-              video: {
-
-                facingMode: {
-                  ideal: cameraAtual
-                },
-
-                width: {
-                  ideal: 1280
-                },
-
-                height: {
-                  ideal: 720
-                }
-
-              },
-
-              audio: false
-
-            });
-
-
-        const video =
-          document.getElementById(
-            "video"
-          );
-
-
-        video.srcObject =
-          streamCamera;
-
-
-        await video.play();
-
-
-        status.innerText =
-          cameraAtual === "environment"
-            ? "Câmera traseira pronta. Aguardando QR Code."
-            : "Câmera frontal pronta. Aguardando QR Code.";
-
-
-        btnCamera.style.display =
-          "none";
-
-
-        btnTrocar.style.display =
-          "block";
-
-
-        leituraAtiva =
-          true;
-
-
-        processandoQR =
-          false;
-
-
-        requestAnimationFrame(
-          lerQRCode
-        );
-
-      }
-
-
-      catch (erro) {
-
-        console.error(
-          erro
-        );
-
-
-        status.innerText =
-          "Erro da câmera: " +
-          erro.name +
-          " - " +
-          erro.message;
-
-      }
-
-    }
-
-
-    function lerQRCode() {
-
-      if (
-        !leituraAtiva ||
-        processandoQR
-      ) {
-
-        requestAnimationFrame(
-          lerQRCode
-        );
-
-        return;
-
-      }
-
-
-      const video =
-        document.getElementById(
-          "video"
-        );
-
-      const canvas =
-        document.getElementById(
-          "canvas"
-        );
-
-      const contexto =
-        canvas.getContext(
-          "2d",
-          {
-            willReadFrequently: true
-          }
-        );
-
-
-      if (
-        video.readyState ===
-        video.HAVE_ENOUGH_DATA
-      ) {
-
-        canvas.width =
-          video.videoWidth;
-
-        canvas.height =
-          video.videoHeight;
-
-
-        contexto.drawImage(
-          video,
-          0,
-          0,
-          canvas.width,
-          canvas.height
-        );
-
-
-        const imagem =
-          contexto.getImageData(
-            0,
-            0,
-            canvas.width,
-            canvas.height
-          );
-
-
-        const codigo =
-          jsQR(
-            imagem.data,
-            imagem.width,
-            imagem.height,
-            {
-              inversionAttempts:
-                "dontInvert"
-            }
-          );
-
-
-        if (
-          codigo &&
-          codigo.data
-        ) {
-
-          processandoQR =
-            true;
-
-
-          qrDetectado(
-            codigo.data.trim()
-          );
-
-
-          return;
-
-        }
-
-      }
-
-
-      requestAnimationFrame(
-        lerQRCode
+      mira.classList.remove(
+        "detectado"
       );
-
-    }
-
-
-    function qrDetectado(valor) {
-
-      const status =
-        document.getElementById(
-          "statusCamera"
-        );
-
-      const resultado =
-        document.getElementById(
-          "resultadoLeitura"
-        );
 
 
       status.innerText =
-        "QR Code identificado.";
+        cameraAtual ===
+        "environment"
+
+          ?
+
+        "Câmera traseira pronta. Aguardando QR Code."
+
+          :
+
+        "Câmera frontal pronta. Aguardando QR Code.";
 
 
-      resultado.innerText =
-        "QR CODE LIDO: " +
-        valor;
 
-
-      resultado.style.display =
-        "block";
-
-
-      setTimeout(
-        function() {
-
-          resultado.style.display =
-            "none";
-
-
-          status.innerText =
-            "Aguardando próximo QR Code.";
-
-
-          processandoQR =
-            false;
-
-
-          requestAnimationFrame(
-            lerQRCode
-          );
-
-        },
-        3000
-      );
-
-    }
-
-
-    function pararCamera() {
-
-      leituraAtiva =
+      processando =
         false;
 
 
-      if (
-        streamCamera
-      ) {
+    },
 
-        streamCamera
-          .getTracks()
-          .forEach(
-            function(track) {
+    3000
 
-              track.stop();
-
-            }
-          );
+  );
 
 
-        streamCamera =
-          null;
-
-      }
-
-    }
+}
 
 
-    async function trocarCamera() {
 
-      const status =
-        document.getElementById(
-          "statusCamera"
-        );
+/* ==============================
+   TROCAR CÂMERA
+   ============================== */
 
 
-      status.innerText =
-        "Trocando câmera...";
+async function trocarCamera() {
 
 
-      cameraAtual =
-        cameraAtual === "environment"
-          ? "user"
-          : "environment";
-
-
-      await iniciarCamera();
-
-    }
-
-
-    window.addEventListener(
-      "beforeunload",
-      function() {
-
-        pararCamera();
-
-      }
+  const status =
+    document.getElementById(
+      "statusCamera"
     );
 
-  </script>
+
+  status.innerText =
+    "Trocando câmera...";
+
+
+
+  if (
+    cameraAtual ===
+    "environment"
+  ) {
+
+    cameraAtual =
+      "user";
+
+  }
+
+  else {
+
+    cameraAtual =
+      "environment";
+
+  }
+
+
+
+  ultimoCodigo =
+    "";
+
+
+  horarioUltimaLeitura =
+    0;
+
+
+
+  await iniciarCamera();
+
+
+}
+
+
+
+/* ==============================
+   PARAR CÂMERA
+   ============================== */
+
+
+function pararCamera() {
+
+
+  scannerLigado =
+    false;
+
+
+  cancelarScanner();
+
+
+
+  if (
+    streamCamera
+  ) {
+
+
+    streamCamera
+      .getTracks()
+      .forEach(
+
+        function(track) {
+
+          track.stop();
+
+        }
+
+      );
+
+
+    streamCamera =
+      null;
+
+
+  }
+
+
+}
+
+
+
+/* ==============================
+   CANCELAR SCANNER
+   ============================== */
+
+
+function cancelarScanner() {
+
+
+  if (
+    temporizadorScanner
+  ) {
+
+
+    clearTimeout(
+      temporizadorScanner
+    );
+
+
+    temporizadorScanner =
+      null;
+
+
+  }
+
+
+}
+
+
+
+/* ==============================
+   SAÍDA DA PÁGINA
+   ============================== */
+
+
+window.addEventListener(
+
+  "beforeunload",
+
+  function() {
+
+    pararCamera();
+
+  }
+
+);
+
+
+</script>
+
 
 </body>
+
 </html>
