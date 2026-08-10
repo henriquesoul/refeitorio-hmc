@@ -3,10 +3,14 @@
 <head>
   <meta charset="UTF-8">
 
-  <meta name="viewport"
-        content="width=device-width,
-                 initial-scale=1.0,
-                 maximum-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width,
+             initial-scale=1.0,
+             maximum-scale=1.0,
+             user-scalable=no">
+
+  <meta name="theme-color" content="#063b75">
 
   <title>Controle de Refeitório HMC</title>
 
@@ -15,151 +19,370 @@
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       margin: 0;
-      min-height: 100%;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
       font-family: Arial, Helvetica, sans-serif;
       background: #f4f7fb;
       color: #17345c;
     }
 
     body {
-      min-height: 100vh;
+      height: 100dvh;
     }
 
     .app {
-      min-height: 100vh;
+      width: 100%;
+      height: 100dvh;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
     }
 
+    /* =========================
+       CABEÇALHO
+       ========================= */
+
     .topo {
-      background: linear-gradient(135deg, #063b75, #005aa7);
+      flex: 0 0 auto;
+      background: linear-gradient(
+        135deg,
+        #063b75,
+        #005aa7
+      );
+
       color: white;
       text-align: center;
-      padding: 22px 16px 20px;
+
+      padding:
+        clamp(10px, 2vh, 18px)
+        12px
+        clamp(10px, 2vh, 16px);
     }
 
     .hmc {
-      font-size: 38px;
+      font-size:
+        clamp(28px, 7vw, 42px);
+
       font-weight: 900;
       letter-spacing: 2px;
+      line-height: 1;
     }
 
     .hospital {
-      font-size: 12px;
+      margin-top: 5px;
+
+      font-size:
+        clamp(9px, 2.4vw, 13px);
+
       font-weight: 600;
-      margin-top: 3px;
+
+      line-height: 1.2;
     }
 
     .titulo {
-      margin-top: 18px;
-      font-size: 20px;
+      margin-top:
+        clamp(8px, 1.8vh, 14px);
+
+      font-size:
+        clamp(16px, 4.5vw, 22px);
+
       font-weight: 800;
+
+      line-height: 1.1;
     }
 
+
+    /* =========================
+       CONTEÚDO PRINCIPAL
+       ========================= */
+
     .conteudo {
-      flex: 1;
-      padding: 22px 18px;
+      flex: 1 1 auto;
+
+      min-height: 0;
+
       display: flex;
       flex-direction: column;
       align-items: center;
+
+      padding:
+        clamp(8px, 1.5vh, 14px)
+        14px
+        clamp(8px, 1.5vh, 12px);
+
+      overflow: hidden;
+    }
+
+    .instrucao-area {
+      flex: 0 0 auto;
+      text-align: center;
     }
 
     .icone {
-      font-size: 42px;
-      margin: 3px 0 15px;
+      font-size:
+        clamp(24px, 6vw, 36px);
+
+      line-height: 1;
+      margin-bottom: 5px;
     }
 
     .instrucao {
-      font-size: 23px;
-      line-height: 1.25;
+      font-size:
+        clamp(19px, 5vw, 28px);
+
+      line-height: 1.05;
+
       font-weight: 900;
-      text-align: center;
+
       color: #073f7d;
     }
 
     .subinstrucao {
-      font-size: 17px;
-      margin-top: 5px;
+      margin-top: 4px;
+
+      font-size:
+        clamp(14px, 3.8vw, 18px);
+
       color: #555;
     }
 
+
+    /* =========================
+       ÁREA DA CÂMERA
+       ========================= */
+
     .camera-card {
-      width: 100%;
-      max-width: 460px;
+      flex: 1 1 auto;
+
+      min-height: 0;
+
+      width:
+        min(94vw, 480px);
+
+      margin-top:
+        clamp(8px, 1.5vh, 14px);
+
       background: white;
-      margin-top: 22px;
-      border-radius: 22px;
-      padding: 12px;
-      box-shadow: 0 8px 28px rgba(0,0,0,.10);
+
+      border-radius:
+        clamp(14px, 4vw, 22px);
+
+      padding:
+        clamp(7px, 1.5vw, 12px);
+
+      box-shadow:
+        0 6px 24px rgba(0, 0, 0, 0.10);
+
+      display: flex;
+      flex-direction: column;
     }
 
     .camera {
       position: relative;
+
+      flex: 1 1 auto;
+
+      min-height: 0;
+
       width: 100%;
-      aspect-ratio: 3 / 4;
+
       background: #111;
-      border-radius: 16px;
+
+      border-radius:
+        clamp(10px, 3vw, 16px);
+
       overflow: hidden;
     }
 
     video {
+      display: block;
+
       width: 100%;
       height: 100%;
+
       object-fit: cover;
+
+      background: #111;
     }
 
     .mira {
       position: absolute;
-      inset: 13%;
-      border: 4px solid #0d72cc;
-      border-radius: 18px;
+
+      top: 12%;
+      bottom: 12%;
+      left: 12%;
+      right: 12%;
+
+      border:
+        clamp(3px, 0.7vw, 4px)
+        solid
+        #0d72cc;
+
+      border-radius:
+        clamp(12px, 4vw, 20px);
+
       pointer-events: none;
+
+      box-shadow:
+        0 0 0 1px
+        rgba(255, 255, 255, 0.10);
     }
 
     .status-camera {
-      margin-top: 11px;
-      font-size: 14px;
+      flex: 0 0 auto;
+
+      margin-top: 7px;
+
+      padding: 2px 4px;
+
+      font-size:
+        clamp(11px, 2.8vw, 14px);
+
+      line-height: 1.2;
+
       text-align: center;
+
       color: #667085;
     }
 
+
+    /* =========================
+       BOTÕES
+       ========================= */
+
     .botoes {
-      margin-top: 18px;
-      width: 100%;
-      max-width: 460px;
+      flex: 0 0 auto;
+
+      width:
+        min(94vw, 480px);
+
+      margin-top:
+        clamp(7px, 1.3vh, 12px);
+
       display: flex;
-      gap: 10px;
+
+      gap: 8px;
+
       justify-content: center;
-      flex-wrap: wrap;
     }
 
     .botao {
-      padding: 14px 22px;
-      border: 0;
-      border-radius: 12px;
+      flex: 1;
+
+      min-height: 44px;
+
+      padding:
+        10px 12px;
+
+      border: none;
+
+      border-radius: 11px;
+
       background: #07549a;
+
       color: white;
-      font-size: 15px;
-      font-weight: bold;
+
+      font-size:
+        clamp(12px, 3.3vw, 15px);
+
+      font-weight: 800;
+
       cursor: pointer;
+
+      touch-action: manipulation;
+    }
+
+    .botao:active {
+      transform: scale(0.98);
     }
 
     .botao-secundario {
       background: #e8f2ff;
+
       color: #07549a;
+
       border: 2px solid #07549a;
     }
 
+
+    /* =========================
+       RODAPÉ
+       ========================= */
+
     .rodape {
+      flex: 0 0 auto;
+
       background: #063b75;
+
       color: white;
+
       text-align: center;
-      padding: 16px 10px;
-      font-size: 12px;
-      line-height: 1.4;
+
+      padding:
+        clamp(7px, 1.3vh, 11px)
+        8px;
+
+      font-size:
+        clamp(9px, 2.5vw, 12px);
+
+      line-height: 1.25;
     }
+
+
+    /* =========================
+       TELAS MUITO BAIXAS
+       ========================= */
+
+    @media (max-height: 650px) {
+
+      .hospital {
+        display: none;
+      }
+
+      .titulo {
+        margin-top: 5px;
+      }
+
+      .icone {
+        display: none;
+      }
+
+      .subinstrucao {
+        display: none;
+      }
+
+      .camera-card {
+        margin-top: 6px;
+      }
+
+      .botoes {
+        margin-top: 5px;
+      }
+
+    }
+
+
+    /* =========================
+       TELAS MAIS LARGAS
+       ========================= */
+
+    @media (min-width: 700px) {
+
+      .camera-card {
+        width: min(58vw, 520px);
+      }
+
+      .botoes {
+        width: min(58vw, 520px);
+      }
+
+    }
+
   </style>
 </head>
 
@@ -186,16 +409,20 @@
 
     <main class="conteudo">
 
-      <div class="icone">
-        🍴
-      </div>
+      <div class="instrucao-area">
 
-      <div class="instrucao">
-        APONTE O QR CODE
-      </div>
+        <div class="icone">
+          🍴
+        </div>
 
-      <div class="subinstrucao">
-        para a câmera
+        <div class="instrucao">
+          APONTE O QR CODE
+        </div>
+
+        <div class="subinstrucao">
+          para a câmera
+        </div>
+
       </div>
 
 
@@ -213,6 +440,7 @@
           <div class="mira"></div>
 
         </div>
+
 
         <div
           class="status-camera"
@@ -268,20 +496,27 @@
 
     let streamCamera = null;
 
-    // A câmera traseira abre primeiro.
-    let cameraAtual = "environment";
+    let cameraAtual =
+      "environment";
 
 
     async function iniciarCamera() {
 
       const status =
-        document.getElementById("statusCamera");
+        document.getElementById(
+          "statusCamera"
+        );
 
       const btnCamera =
-        document.getElementById("btnCamera");
+        document.getElementById(
+          "btnCamera"
+        );
 
       const btnTrocar =
-        document.getElementById("btnTrocar");
+        document.getElementById(
+          "btnTrocar"
+        );
+
 
       status.innerText =
         "Solicitando acesso à câmera...";
@@ -301,49 +536,58 @@
         }
 
 
-        // Encerra a câmera anterior antes de abrir outra.
-        if (streamCamera) {
-
-          streamCamera
-            .getTracks()
-            .forEach(function(track) {
-              track.stop();
-            });
-
-        }
+        pararCamera();
 
 
         streamCamera =
-          await navigator.mediaDevices.getUserMedia({
+          await navigator.mediaDevices
+            .getUserMedia({
 
-            video: {
+              video: {
 
-              facingMode: {
-                ideal: cameraAtual
-              }
+                facingMode: {
+                  ideal: cameraAtual
+                },
 
-            },
+                width: {
+                  ideal: 1280
+                },
 
-            audio: false
+                height: {
+                  ideal: 720
+                }
 
-          });
+              },
+
+              audio: false
+
+            });
 
 
         const video =
-          document.getElementById("video");
+          document.getElementById(
+            "video"
+          );
+
 
         video.srcObject =
           streamCamera;
 
+
         await video.play();
 
 
-        if (cameraAtual === "environment") {
+        if (
+          cameraAtual ===
+          "environment"
+        ) {
 
           status.innerText =
             "Câmera traseira pronta. Aguardando QR Code.";
 
-        } else {
+        }
+
+        else {
 
           status.innerText =
             "Câmera frontal pronta. Aguardando QR Code.";
@@ -354,21 +598,54 @@
         btnCamera.style.display =
           "none";
 
+
         btnTrocar.style.display =
-          "inline-block";
+          "block";
 
       }
 
 
       catch (erro) {
 
-        console.error(erro);
+        console.error(
+          erro
+        );
+
 
         status.innerText =
           "Erro da câmera: " +
           erro.name +
           " - " +
           erro.message;
+
+
+        btnCamera.style.display =
+          "block";
+
+      }
+
+    }
+
+
+    function pararCamera() {
+
+      if (
+        streamCamera
+      ) {
+
+        streamCamera
+          .getTracks()
+          .forEach(
+            function(track) {
+
+              track.stop();
+
+            }
+          );
+
+
+        streamCamera =
+          null;
 
       }
 
@@ -378,19 +655,29 @@
     async function trocarCamera() {
 
       const status =
-        document.getElementById("statusCamera");
+        document.getElementById(
+          "statusCamera"
+        );
+
 
       status.innerText =
         "Trocando câmera...";
 
 
-      if (cameraAtual === "environment") {
+      if (
+        cameraAtual ===
+        "environment"
+      ) {
 
-        cameraAtual = "user";
+        cameraAtual =
+          "user";
 
-      } else {
+      }
 
-        cameraAtual = "environment";
+      else {
+
+        cameraAtual =
+          "environment";
 
       }
 
@@ -398,6 +685,16 @@
       await iniciarCamera();
 
     }
+
+
+    window.addEventListener(
+      "beforeunload",
+      function() {
+
+        pararCamera();
+
+      }
+    );
 
   </script>
 
